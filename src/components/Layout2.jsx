@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { MainSidebar } from "./MainSidebar";
-function Layout() {
+function Layout2() {
   return (
     <div className="flex h-full mr-5">
       <MainSidebar />
@@ -9,4 +9,4 @@ function Layout() {
   );
 }
 
-export default Layout;
+export default Layout2;

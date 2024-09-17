@@ -1,42 +1,11 @@
 import React from "react";
-import Card from "../components/Card";
-
+// import SaleBanner from "../components/saleBanner/SaleBanner";
+import Products from "./Products";
 function Home() {
   return (
-    <div className="container">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+    <div className=" w-full flex flex-wrap">
+      <Products />
+      {/* <SaleBanner /> */}
     </div>
   );
 }

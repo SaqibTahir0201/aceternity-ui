@@ -55,11 +55,11 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
     <>
       <motion.div
         className={cn(
-          "h-[calc(100vh-80px)] px-4 py-4 hidden  md:flex md:flex-col  flex-shrink-0 ",
+          "h-[calc(100vh-80px)] px-4 py-4 hidden  md:flex md:flex-col flex-shrink-0",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "350px" : "60px") : "300px",
         }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -81,7 +81,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
         )}
         {...props}
       >
-        <div className="flex  justify-end z-20 w-full">
+        <div className="flex justify-end z-20 w-full">
           <IconMenu2
             className="text-neutral-800  dark:text-neutral-200"
             onClick={() => setOpen(!open)}
@@ -98,12 +98,12 @@ export const MobileSidebar = ({ className, children, ...props }) => {
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-full w-full inset-0 bg-primary-content p-10 z-[100] flex flex-col justify-between",
                 className
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-neutral-800 bg-red-500 dark:text-neutral-200"
+                className="absolute right-10 top-10 z-50 bg-primary-content"
                 onClick={() => setOpen(!open)}
               >
                 <IconX />

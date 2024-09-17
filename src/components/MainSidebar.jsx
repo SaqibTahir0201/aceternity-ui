@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 import {
   Sidebar,
   SidebarBody,
@@ -6,49 +7,63 @@ import {
   SidebarProvider,
 } from "./ui/sidebar";
 import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
+  IconHome,
+  IconKey,
+  IconKeyOff,
+  IconLoader2,
+  IconSalad,
+  IconShoppingCart,
 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { cn } from "../lib/utils";
-
+import LogoutButton from "./SignOut";
+import userImg from "../../public/icon_user.png";
+// const auth = getAuth();
 export function MainSidebar() {
+  const { user, setUser } = useContext(AuthContext); // Add setUser to the destructuring
+
   const links = [
     {
-      label: "Dashboard",
-      href: "#",
+      label: "Sale",
+      href: "/salebanner",
+      icon: <IconSalad className="text-base-content h-5 w-5 flex-shrink-0" />,
+    },
+    {
+      label: "Home",
+      href: "/",
+      icon: <IconHome className="text-base-content h-5 w-5 flex-shrink-0" />,
+    },
+    {
+      label: "Cart",
+      href: "/cart",
       icon: (
-        <IconBrandTabler className="text-base-content h-5 w-5 flex-shrink-0" />
+        <IconShoppingCart className="text-base-content h-5 w-5 flex-shrink-0" />
       ),
     },
     {
-      label: "Profile",
-      href: "#",
-      icon: (
-        <IconUserBolt className="text-base-content h-5 w-5 flex-shrink-0" />
+      label: user.isLogin ? <LogoutButton /> : "Login",
+      href: "/signup",
+      icon: user.isLogin ? (
+        <IconKeyOff className="text-base-content h-5 w-5 flex-shrink-0" />
+      ) : (
+        <IconKey className="text-base-content h-5 w-5 flex-shrink-0" />
       ),
     },
     {
-      label: "Settings",
-      href: "#",
-      icon: (
-        <IconSettings className="text-base-content h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "Logout",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="text-base-content h-5 w-5 flex-shrink-0" />
-      ),
+      label: "Loading",
+      href: "/loader",
+      icon: <IconLoader2 className="text-base-content h-5 w-5 flex-shrink-0" />,
     },
   ];
   const [open, setOpen] = useState(false);
+
   return (
-    <div className={cn("h-[calc(100vh-80px)] w-fit flex bg-primary-content rounded-tr-2xl sticky top-5 left-0")}>
+    <div
+      className={cn(
+        "h-[calc(100vh-80px)] w-fit flex bg-primary-content rounded-tr-2xl  sticky top-5 left-0 z-50"
+      )}
+    >
       <SidebarProvider open={open} setOpen={setOpen} animate={true}>
         <Sidebar>
           <SidebarBody className="justify-between gap-10">
@@ -62,13 +77,17 @@ export function MainSidebar() {
             </div>
             <div>
               <SidebarLink
+                className={`text-primary`}
                 link={{
-                  label: "Saqib Tahir",
-                  href: "#",
+                  label: user.isLogin
+                    ? user.userInfo.provider === "password"
+                      ? user.userInfo.email
+                      : user.userInfo.name
+                    : "person is not logged in",
                   icon: (
                     <img
-                      src="https://assets.aceternity.com/manu.png"
-                      className="h-7 w-7 flex-shrink-0 rounded-full"
+                      src={user.isLogin ? user.userInfo.photoUrl : userImg}
+                      className="bg-primary h-7 w-7 flex-shrink-0 rounded-full"
                       width={50}
                       height={50}
                       alt="Avatar"
@@ -76,6 +95,7 @@ export function MainSidebar() {
                   ),
                 }}
               />
+              {console.log("userrrrrr", user)}
             </div>
           </SidebarBody>
         </Sidebar>
@@ -83,6 +103,7 @@ export function MainSidebar() {
     </div>
   );
 }
+
 export const Logo = () => {
   return (
     <Link
