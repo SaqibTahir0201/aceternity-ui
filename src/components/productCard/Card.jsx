@@ -32,7 +32,7 @@ const Card = ({ product }) => {
             >
               ${product.price}
             </span>
-            <AddToCart />
+            <AddToCart product={product} />
           </div>
         </div>
       </div>
